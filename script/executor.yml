@@ -1,0 +1,18 @@
+---
+# Listen on this <IP|all>:<TCP port>
+listen_address: ":8088"
+# Display more output
+verbose: true
+# Uncomment these settings to use TLS
+# tls_key: "certs/key.pem"
+# tls_crt: "certs/cert.pem"
+commands:
+  # This command matches every alert
+  - cmd: /script/sample-script.sh
+    # Maximum instances of this command that can be running at the same time.\
+    match_labels:
+      "alertname": "InstanceDownmaster"
+    max: 3
+    # Don't signal command if a matching 'resolved' message is
+    # sent from alertmanager while this command is still running.
+    ignore_resolved: true

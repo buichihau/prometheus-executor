@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+
+ prometheus_executor:
+    image: prometheus-am-executor:1.4
+    container_name: prometheus_executor
+    restart: always
+    volumes:
+       - /etc/localtime:/etc/localtime:ro
+       - ./script:/script
+    command: /usr/bin/prometheus-am-executor -f /script/executor.yml -v
+    network_mode: "host"
